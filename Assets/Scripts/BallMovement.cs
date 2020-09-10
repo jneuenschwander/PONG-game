@@ -14,8 +14,8 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private float movementForce = 1f;
     
     private void Awake()
-    
     {
+        
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
     void Start()
@@ -26,10 +26,12 @@ public class BallMovement : MonoBehaviour
     void Update()
     {
         _velocity = _rigidbody2D.velocity;
-        if (transform.position.x >= 6.25)
+        if (transform.position.x >= 6.5f)
         {
             transform.position = new Vector3(0f,0f,0f); // aqui deberia enviarse la señal de gano un punto
-        }else if(gameObject.transform.position.x <= -6.25) {
+        }
+        else if(transform.position.x <= -6.5f) 
+        {
             transform.position = new Vector3(0f,0f,0f);
         }
     }
@@ -38,7 +40,8 @@ public class BallMovement : MonoBehaviour
         var speed = _velocity.magnitude;
         var newDirection = Vector3.Reflect(_velocity.normalized, other.contacts[0].normal); //lógica del rebote
         _rigidbody2D.velocity = newDirection * Mathf.Max(speed, 0f);
-        
+           
         
     }
+    
 }
